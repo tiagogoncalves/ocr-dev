@@ -15,11 +15,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
+import com.gtranslate.Language;
+import com.gtranslate.Translator;
 
 public class SyolMainActivity extends Activity {
 
 	private Bitmap bitmap;
-	private TextView txtView;
+	private TextView txtView,txtViewTrans;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class SyolMainActivity extends Activity {
 		Button btnStart = (Button) findViewById(R.id.button_start);
 		
 		txtView= (TextView) findViewById(R.id.textView);
+		txtViewTrans= (TextView) findViewById(R.id.textViewTranslated);
 		
 		btnStart.setOnClickListener(new OnClickListener() {
 			@Override
@@ -52,10 +55,18 @@ public class SyolMainActivity extends Activity {
 				baseApi.end();
 				
 				txtView.setText(recognizedText);
+				txtViewTrans.setText(translate(recognizedText));
 				
 			}
 		});
 		
+	}
+	
+	private static String translate(String entry){
+		String t = "";
+		Translator translate = Translator.getInstance();
+		t = translate.translate(entry, Language.ENGLISH, Language.PORTUGUESE);
+		return t;
 	}
 	
 	private void loadBitmap(){
