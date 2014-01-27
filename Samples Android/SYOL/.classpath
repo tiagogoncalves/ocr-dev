@@ -6,6 +6,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/google-api-translate-java-0.97 (1).jar"/>
-	<classpathentry kind="lib" path="/home/tiagogoncalves/workspace/ocr-dev/Samples Android/SYOL/libs/gtranslateapi-1.0.jar"/>
+	<classpathentry kind="lib" path="libs/gtranslateapi-1.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
