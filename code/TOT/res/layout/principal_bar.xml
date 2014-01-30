@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bar_fragment"
+    style="@style/st_layout_horizontal_default"
+    android:background="@drawable/tot_bar" >
+
+    <ImageView
+        android:id="@+id/logo_tot_bar"
+        style="@style/st_layout_principal_bar"
+        android:src="@drawable/logo_tot"
+        tools:ignore="ContentDescription" />
+
+
+</LinearLayout>
