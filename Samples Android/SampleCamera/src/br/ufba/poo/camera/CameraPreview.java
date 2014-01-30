@@ -20,7 +20,6 @@ import android.view.SurfaceView;
  * @author Equipe OCRDev
  *
  */
-@SuppressLint("NewApi")
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback{
 	private SurfaceHolder holder;
 	private Camera camera;
@@ -48,14 +47,14 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 	private void focalizeArea(){
 		Camera.Parameters params = camera.getParameters();
 
-		if (params.getMaxNumMeteringAreas() > 0){ // check that metering areas are supported
+//		if (params.getMaxNumMeteringAreas() > 0){ // check that metering areas are supported
 		    List<Camera.Area> meteringAreas = new ArrayList<Camera.Area>();
-		    Rect areaRect1 = new Rect(-100, -100, 100, 100);    // specify an area in center of image
-		    meteringAreas.add(new Camera.Area(areaRect1, 600)); // set weight to 60%
-		    Rect areaRect2 = new Rect(800, -1000, 1000, -800);  // specify an area in upper right of image
+//		    Rect areaRect1 = new Rect(0, 10, 10, 10);    // specify an area in center of image
+//		    meteringAreas.add(new Camera.Area(areaRect1, 600)); // set weight to 60%
+		    Rect areaRect2 = new Rect(0, 0, 0, 0);  // specify an area in upper right of image
 		    meteringAreas.add(new Camera.Area(areaRect2, 400)); // set weight to 40%
 		    params.setMeteringAreas(meteringAreas);
-		}
+//		}
 		camera.setParameters(params);
 		
 	}
@@ -79,7 +78,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 		//TODO tratar tamanho e redimensionamento, rotação ou reformatação aqui
 		//Caso queira redimensionar verificar em getSuporttedPreviewSizes() e 
 		//utilizar setPreviewSize();
-		
+		setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
 		try {
 			camera.setPreviewDisplay(holder);
 			camera.startPreview();
@@ -95,8 +94,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 	@Override
 	public void surfaceCreated(SurfaceHolder arg0) {
 		try {
-			setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-			focalizeArea();
 			camera.setPreviewDisplay(holder);
 			camera.startPreview();
 		} catch (IOException e) {
