@@ -8,6 +8,10 @@
     <string name="portuguese">Português</string>
     <string name="english">Inglês</string>
     <string name="french">Francês</string>
+    <string name="german">Alemão</string>
+    <string name="spanish">Espanhol</string>
     <string name="label_camera">Clique aqui para tirar foto!</string>
+    <string name="cancel">Cancelar</string>
+    <string name="ok">Escolher</string>
 
 </resources>

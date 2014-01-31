@@ -1,17 +1,28 @@
 package br.ufba.poo.ocr.app;
 
 import android.app.Application;
-import android.graphics.Bitmap;
 
+/**
+ * Classe que implementa o padrão Singleton. Sua instância é única e
+ * presente durante toda a execução do sistema.
+ * @author Equipe OCRDev
+ *
+ */
 public class TotApp extends Application {
-	private Bitmap bitmap;
-
-	public Bitmap getBitmap() {
-		return bitmap;
+	private String languageOriginalDefault;
+	private String languageTranslateDefault;
+	
+	public String getLanguageOriginalDefault() {
+		return languageOriginalDefault;
 	}
-
-	public void setBitmap(Bitmap bitmap) {
-		this.bitmap = bitmap;
+	public void setLanguageOriginalDefault(String languageOriginalDefault) {
+		this.languageOriginalDefault = languageOriginalDefault;
+	}
+	public String getLanguageTranslateDefault() {
+		return languageTranslateDefault;
+	}
+	public void setLanguageTranslateDefault(String languageTranslateDefault) {
+		this.languageTranslateDefault = languageTranslateDefault;
 	}
 	
 }

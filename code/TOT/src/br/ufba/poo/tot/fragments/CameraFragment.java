@@ -26,21 +26,17 @@ public class CameraFragment extends Fragment  implements OnCameraListener{
 	private Uri fileUri;
 	private Bitmap photo;
 	TextView initial;
-	ImageView imagePhoto;
+	ImageView viewPhoto;
 	
-	
-	public CameraFragment(){
-		
-	}
 	
 	/**
 	 * Atualiza foto
 	 */
 	private void updatePhoto() {
 		if(photo!=null){
-			imagePhoto.setImageBitmap(photo);
+			viewPhoto.setImageBitmap(photo);
 			initial.setVisibility(ImageView.GONE);
-			imagePhoto.setVisibility(ImageView.VISIBLE);
+			viewPhoto.setVisibility(ImageView.VISIBLE);
 		}
 	}
 
@@ -56,7 +52,7 @@ public class CameraFragment extends Fragment  implements OnCameraListener{
 	 */
 	private void loadComponents(View view) {
 		initial = (TextView) view .findViewById(R.id.initial);
-		imagePhoto = (ImageView) view.findViewById(R.id.photo);
+		viewPhoto = (ImageView) view.findViewById(R.id.photo);
 		
 		initial.setOnClickListener(new OnClickListener() {
 			@Override
@@ -66,7 +62,7 @@ public class CameraFragment extends Fragment  implements OnCameraListener{
 			}
 		});
 		
-		imagePhoto.setOnClickListener(new OnClickListener() {
+		viewPhoto.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				takePicture();

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    
     <fragment
         android:id="@+id/camera_fragment"
         android:name="br.ufba.poo.tot.fragments.CameraFragment"
@@ -26,7 +27,7 @@
     <fragment
         android:id="@+id/search_fragment"
         android:name="br.ufba.poo.tot.fragments.SearchFragment"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
 </LinearLayout>

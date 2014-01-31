@@ -14,7 +14,6 @@ import android.provider.MediaStore;
 import android.widget.TextView;
 import br.ufba.poo.ocr.camera.Picture;
 
-import com.googlecode.tesseract.android.TessBaseAPI;
 import com.gtranslate.Language;
 import com.gtranslate.Translator;
 

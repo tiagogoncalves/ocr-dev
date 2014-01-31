@@ -43,10 +43,12 @@ public class TOTMainActivity extends FragmentActivity{
 		if (requestCode == CameraCapturer.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 			cameraFragment.setPhotoCaptured(inflateBitmap());
 		}
-
 	}
 	
-	
+	/**
+	 * Método que infla o bitmap vindo do stream da câmera
+	 * @return
+	 */
 	private Bitmap inflateBitmap() {
 		InputStream stream = null;
 		Bitmap photo = null;

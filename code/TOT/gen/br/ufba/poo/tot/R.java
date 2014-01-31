@@ -28,36 +28,47 @@ public final class R {
         public static final int tot_bar=0x7f020004;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000c;
-        public static final int bar_fragment=0x7f080003;
+        public static final int action_settings=0x7f080011;
+        public static final int bar_fragment=0x7f080008;
+        public static final int buttons=0x7f080005;
         public static final int camera_fragment=0x7f080000;
-        public static final int change=0x7f080008;
+        public static final int cancel=0x7f080007;
+        public static final int change=0x7f08000d;
         public static final int initial=0x7f080001;
-        public static final int language_from=0x7f080007;
-        public static final int language_to=0x7f080009;
-        public static final int logo_tot_bar=0x7f080004;
+        public static final int item_language=0x7f080003;
+        public static final int language_from=0x7f08000c;
+        public static final int language_list=0x7f080004;
+        public static final int language_to=0x7f08000e;
+        public static final int logo_tot_bar=0x7f080009;
+        public static final int ok=0x7f080006;
         public static final int photo=0x7f080002;
-        public static final int search_fragment=0x7f080006;
-        public static final int textView1=0x7f08000a;
-        public static final int textView2=0x7f08000b;
-        public static final int translate_fragment=0x7f080005;
+        public static final int search_fragment=0x7f08000b;
+        public static final int textView1=0x7f08000f;
+        public static final int textView2=0x7f080010;
+        public static final int translate_fragment=0x7f08000a;
     }
     public static final class layout {
         public static final int camera=0x7f030000;
-        public static final int principal_bar=0x7f030001;
-        public static final int search_fragment=0x7f030002;
-        public static final int tot_main_activity=0x7f030003;
-        public static final int translate_fragment=0x7f030004;
+        public static final int item_language_list=0x7f030001;
+        public static final int language_list_dialog=0x7f030002;
+        public static final int principal_bar=0x7f030003;
+        public static final int search_fragment=0x7f030004;
+        public static final int tot_main_activity=0x7f030005;
+        public static final int translate_fragment=0x7f030006;
     }
     public static final class menu {
         public static final int totmain=0x7f070000;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
+        public static final int cancel=0x7f05000a;
         public static final int english=0x7f050005;
         public static final int french=0x7f050006;
-        public static final int label_camera=0x7f050007;
+        public static final int german=0x7f050007;
+        public static final int label_camera=0x7f050009;
+        public static final int ok=0x7f05000b;
         public static final int portuguese=0x7f050004;
+        public static final int spanish=0x7f050008;
         public static final int text_in_english=0x7f050002;
         public static final int text_in_portuguese=0x7f050003;
         public static final int unavailable_camera=0x7f050001;
