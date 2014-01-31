@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:theme="@style/tot_theme" >
         <activity
-            android:name="br.ufba.poo.tot.TOTMainActivity"
+            android:name="br.ufba.poo.tot.activities.TOTMainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
