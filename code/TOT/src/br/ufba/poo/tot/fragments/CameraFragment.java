@@ -13,17 +13,37 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import br.ufba.poo.tot.R;
+import br.ufba.poo.tot.camera.CameraCapturer;
+import br.ufba.poo.tot.camera.events.OnCameraListener;
 
 /**
  * Esta Fragment é corresponde a Barra Superior Principal do Aplicativo.
  * @author OCRDev
  *
  */
-public class CameraFragment extends Fragment{
+public class CameraFragment extends Fragment  implements OnCameraListener{
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private Uri fileUri;
 	private Bitmap photo;
+	TextView initial;
+	ImageView imagePhoto;
 	
+	
+	public CameraFragment(){
+		
+	}
+	
+	/**
+	 * Atualiza foto
+	 */
+	private void updatePhoto() {
+		if(photo!=null){
+			imagePhoto.setImageBitmap(photo);
+			initial.setVisibility(ImageView.GONE);
+			imagePhoto.setVisibility(ImageView.VISIBLE);
+		}
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.camera, container, false);
@@ -35,8 +55,8 @@ public class CameraFragment extends Fragment{
 	 * Método que trata os componentes da view.
 	 */
 	private void loadComponents(View view) {
-		TextView initial = (TextView) view .findViewById(R.id.initial);
-		ImageView photo = (ImageView) view.findViewById(R.id.photo);
+		initial = (TextView) view .findViewById(R.id.initial);
+		imagePhoto = (ImageView) view.findViewById(R.id.photo);
 		
 		initial.setOnClickListener(new OnClickListener() {
 			@Override
@@ -46,22 +66,27 @@ public class CameraFragment extends Fragment{
 			}
 		});
 		
-		photo.setOnClickListener(new OnClickListener() {
+		imagePhoto.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
+				takePicture();
 			}
 		});
 	}
 	
 	private void takePicture() {
-//		Picture picture = new Picture();
+		CameraCapturer cameraCapturer = new CameraCapturer();
 	    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//	    fileUri = picture.getOutputMediaFileUri(); 
-//	    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+	    fileUri = cameraCapturer.getOutputMediaFileUri(); 
+	    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 	    this.getActivity().startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
-	
+
+	@Override
+	public void setPhotoCaptured(Bitmap photo) {
+		this.photo=photo;
+		updatePhoto();
+	}
+
 
 }
