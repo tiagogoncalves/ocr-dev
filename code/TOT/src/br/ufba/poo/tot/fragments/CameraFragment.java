@@ -8,7 +8,6 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,9 +33,9 @@ public class CameraFragment extends Fragment  implements OnCameraListener{
 	 */
 	private void updatePhoto() {
 		if(photo!=null){
-			viewPhoto.setImageBitmap(photo);
+//			viewPhoto.setImageBitmap(photo);
 			initial.setVisibility(ImageView.GONE);
-			viewPhoto.setVisibility(ImageView.VISIBLE);
+//			viewPhoto.setVisibility(ImageView.VISIBLE);
 		}
 	}
 
@@ -51,23 +50,23 @@ public class CameraFragment extends Fragment  implements OnCameraListener{
 	 * Método que trata os componentes da view.
 	 */
 	private void loadComponents(View view) {
-		initial = (TextView) view .findViewById(R.id.initial);
-		viewPhoto = (ImageView) view.findViewById(R.id.photo);
+//		initial = (TextView) view .findViewById(R.id.initial);
+//		viewPhoto = (ImageView) view.findViewById(R.id.photo);
+//		
+//		initial.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				takePicture();
+//				
+//			}
+//		});
 		
-		initial.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				takePicture();
-				
-			}
-		});
-		
-		viewPhoto.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				takePicture();
-			}
-		});
+//		viewPhoto.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				takePicture();
+//			}
+//		});
 	}
 	
 	private void takePicture() {

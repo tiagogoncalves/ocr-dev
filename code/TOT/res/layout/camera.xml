@@ -3,27 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DCDCE3"
     android:id="@+id/camera_fragment"
     android:orientation="vertical"
     tools:ignore="UseCompoundDrawables" >
 
-    <TextView
-        android:id="@+id/initial"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/photo_background"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="@string/label_camera"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FFFFFF"
-        tools:ignore="ContentDescription" />
-
     <ImageView
-        android:id="@+id/photo"
-         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
+        android:id="@+id/initial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#DCDCE3"
+        android:src="@drawable/btn_photo"
+        android:layout_gravity="center_vertical|center_horizontal"
         tools:ignore="ContentDescription" />
 
 </LinearLayout>

@@ -25,15 +25,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="565.58709"
+     inkscape:cx="273.44423"
      inkscape:cy="619.60338"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="951"
-     inkscape:window-x="0"
-     inkscape:window-y="25"
+     inkscape:window-width="1317"
+     inkscape:window-height="744"
+     inkscape:window-x="49"
+     inkscape:window-y="24"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -51,26 +51,196 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="fill:#dcdce3;fill-opacity:1;stroke:none"
+       id="rect4616"
+       width="465.71429"
+       height="468.57144"
+       x="112.85714"
+       y="132.07646"
+       ry="0"
+       inkscape:export-filename="/home/flavio/workspace/ocr-dev/art/photo_background_off.png"
+       inkscape:export-xdpi="26"
+       inkscape:export-ydpi="26" />
     <g
-       id="g3757"
-       inkscape:export-filename="/home/tiagogoncalves/workspace/ocr-dev/art/photo_background.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90">
-      <rect
-         y="58.07674"
-         x="174.28571"
-         height="465.71399"
-         width="465.71399"
-         id="rect2985"
-         style="fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke:none" />
-      <rect
-         ry="46.961884"
-         y="80.177383"
-         x="201.81552"
-         height="412.9407"
-         width="412.9407"
-         id="rect2987"
-         style="fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:6.74527693;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:13.4905538, 13.4905538;stroke-dashoffset:0" />
+       id="g3620"
+       transform="matrix(0.43652787,0,0,0.46720723,-97.497547,181.15533)"
+       style="fill:#ffffff"
+       inkscape:export-filename="/home/flavio/workspace/ocr-dev/art/photo_background_off.png"
+       inkscape:export-xdpi="26"
+       inkscape:export-ydpi="26">
+      <g
+         id="g3589"
+         style="fill:#ffffff">
+        <g
+           id="g3559"
+           style="fill:#ffffff">
+          <g
+             id="g3530"
+             style="fill:#ffffff">
+            <g
+               id="g3502"
+               style="fill:#ffffff">
+              <g
+                 id="g3475"
+                 style="fill:#ffffff">
+                <g
+                   id="g3449"
+                   style="fill:#ffffff">
+                  <g
+                     id="g3424"
+                     style="fill:#ffffff">
+                    <g
+                       id="g3400"
+                       style="fill:#ffffff">
+                      <g
+                         id="g3377"
+                         style="fill:#ffffff">
+                        <g
+                           id="g3355"
+                           style="fill:#ffffff">
+                          <g
+                             id="g3334"
+                             style="fill:#ffffff">
+                            <g
+                               id="g3314"
+                               style="fill:#ffffff">
+                              <g
+                                 id="g3295"
+                                 style="fill:#ffffff">
+                                <g
+                                   id="g3277"
+                                   style="fill:#ffffff">
+                                <g
+                                   id="g3260"
+                                   style="fill:#ffffff">
+                                <g
+                                   id="g3244"
+                                   style="fill:#ffffff">
+                                <g
+                                   id="g3229"
+                                   style="fill:#ffffff">
+                                <g
+                                   id="g3215"
+                                   style="fill:#ffffff">
+                                <g
+                                   transform="translate(411.42857,-61.428571)"
+                                   id="g3202"
+                                   style="fill:#ffffff">
+                                <g
+                                   id="g3190"
+                                   style="fill:#ffffff">
+                                <g
+                                   id="g3179"
+                                   style="fill:#ffffff">
+                                <g
+                                   id="g3169"
+                                   style="fill:#ffffff">
+                                <g
+                                   id="g3160"
+                                   style="fill:#ffffff">
+                                <g
+                                   id="g3152"
+                                   style="fill:#ffffff">
+                                <g
+                                   id="g3145"
+                                   style="fill:#ffffff">
+                                <g
+                                   id="g3139"
+                                   transform="translate(-328.57143,27.142857)"
+                                   style="fill:#ffffff">
+                                <g
+                                   inkscape:export-ydpi="90"
+                                   inkscape:export-xdpi="90"
+                                   inkscape:export-filename="/mnt/remote/home_remote/workspace/woop-code/art/btn_take_photos_videos/btn_photo.png"
+                                   transform="matrix(1.3527223,0,0,1.3527223,449.70771,-421.47326)"
+                                   id="g3008"
+                                   style="fill:#ffffff;fill-opacity:1">
+                                <rect
+                                   style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                   id="rect3915"
+                                   width="394.28574"
+                                   height="258.31799"
+                                   x="156.85715"
+                                   y="510.3299"
+                                   rx="22.834829" />
+                                <rect
+                                   style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                   id="rect3917"
+                                   width="105.78397"
+                                   height="79.285713"
+                                   x="195.32401"
+                                   y="451.505"
+                                   rx="22.834829" />
+                                <path
+                                   sodipodi:type="arc"
+                                   style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+                                   id="path3919"
+                                   sodipodi:cx="1252.8572"
+                                   sodipodi:cy="585.2193"
+                                   sodipodi:rx="70"
+                                   sodipodi:ry="61.42857"
+                                   d="m 1322.8572,585.2193 c 0,33.92606 -31.3401,61.42857 -70,61.42857 -38.66,0 -70,-27.50251 -70,-61.42857 0,-33.92606 31.34,-61.42857 70,-61.42857 38.6599,0 70,27.50251 70,61.42857 z"
+                                   transform="matrix(0.84146342,0,0,1.0200675,-687.01046,34.852858)" />
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
     </g>
+    <path
+       sodipodi:type="arc"
+       style="fill:#ff00ff;fill-opacity:1;stroke:none"
+       id="path3652"
+       sodipodi:cx="333.57144"
+       sodipodi:cy="373.07648"
+       sodipodi:rx="25"
+       sodipodi:ry="27.857143"
+       d="m 358.57144,373.07648 a 25,27.857143 0 1 1 -50,0 25,27.857143 0 1 1 50,0 z"
+       transform="matrix(1.4285686,0,0,1.2820487,-132.24403,-110.22567)"
+       inkscape:export-filename="/home/flavio/workspace/ocr-dev/art/photo_background_off.png"
+       inkscape:export-xdpi="26"
+       inkscape:export-ydpi="26" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:6.44200000000000017;stroke-miterlimit:4.40000009999999975;stroke-opacity:1;stroke-dasharray:25.76800000000000068, 25.76800000000000068;stroke-dashoffset:0"
+       id="rect3846"
+       width="403.71497"
+       height="403.71497"
+       x="143.57115"
+       y="161.36176"
+       ry="58.625275"
+       inkscape:export-filename="/home/flavio/workspace/ocr-dev/art/photo_background_off.png"
+       inkscape:export-xdpi="26"
+       inkscape:export-ydpi="26" />
+    <rect
+       style="fill:#dcdce3;fill-opacity:1;stroke:#ffffff;stroke-width:6.44199990999999983;stroke-linecap:round;stroke-miterlimit:4.40000009999999975;stroke-opacity:1;stroke-dasharray:25.76800000000000068, 25.76800000000000068;stroke-dashoffset:0"
+       id="rect4618"
+       width="48.57143"
+       height="91.428574"
+       x="17.142857"
+       y="68.076469"
+       ry="24.285715" />
   </g>
 </svg>

@@ -1,6 +1,7 @@
 package br.ufba.poo.tot.dialogs;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ public class LanguageAdapter extends BaseAdapter{
 		languages = new ArrayList<String>();
 		for(Object l: mapLanguage.keySet().toArray())
 			languages.add((String)l);
+		Collections.sort(languages);//TODO Não está ordenando
 	}
 	
 	
