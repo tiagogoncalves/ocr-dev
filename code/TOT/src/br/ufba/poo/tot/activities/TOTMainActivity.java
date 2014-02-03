@@ -29,6 +29,7 @@ public class TOTMainActivity extends FragmentActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tot_main_activity);
+//		((TOTApp)getApplication()).setOcrFile(new OCRFile(TOTMainActivity.this));
 		cameraFragment = (CameraFragment)getSupportFragmentManager().findFragmentById(R.id.camera_fragment);
 		cameraCapturer = new CameraCapturer();
 	}

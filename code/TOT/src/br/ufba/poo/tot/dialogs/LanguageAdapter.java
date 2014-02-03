@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RadioButton;
 import br.ufba.poo.tot.R;
-import br.ufba.poo.tot.pojo.Text;
+import br.ufba.poo.tot.pojo.OCRFile;
 
 public class LanguageAdapter extends BaseAdapter{
 
@@ -49,7 +49,7 @@ public class LanguageAdapter extends BaseAdapter{
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.item_language_list, null);
 		RadioButton itemLanguage = (RadioButton) view.findViewById(R.id.item_language);
-		itemLanguage.setText(Text.getMapLanguage(context).get(languages.get(position)));
+		itemLanguage.setText(OCRFile.getMapLanguage(context).get(languages.get(position)));
 		return view;
 	}
 

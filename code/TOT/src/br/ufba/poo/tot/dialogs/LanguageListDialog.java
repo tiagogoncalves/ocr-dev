@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ListView;
 import br.ufba.poo.tot.R;
-import br.ufba.poo.tot.pojo.Text;
+import br.ufba.poo.tot.pojo.OCRFile;
 
 /**
  * Classe que implementa um Dialog(espécie de janela pop-up) das línguas a serem escolhidas
@@ -27,7 +27,7 @@ public class LanguageListDialog extends DialogFragment {
         View v = inflater.inflate(R.layout.language_list_dialog, container, false);
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         ListView languageList = (ListView) v.findViewById(R.id.language_list);
-        LanguageAdapter languageAdapter = new LanguageAdapter(LanguageListDialog.this.getActivity(), Text.getMapLanguage(LanguageListDialog.this.getActivity()));
+        LanguageAdapter languageAdapter = new LanguageAdapter(LanguageListDialog.this.getActivity(), OCRFile.getMapLanguage(LanguageListDialog.this.getActivity()));
         languageList.setAdapter(languageAdapter);
         return v;
     }
