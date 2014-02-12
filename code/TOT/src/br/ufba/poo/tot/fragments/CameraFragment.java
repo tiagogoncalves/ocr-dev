@@ -3,8 +3,6 @@ package br.ufba.poo.tot.fragments;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,11 +12,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import br.ufba.poo.tot.R;
 import br.ufba.poo.tot.camera.CameraCapturer;
 import br.ufba.poo.tot.camera.events.OnCameraListener;
 import br.ufba.poo.tot.camera.events.OnOCRListener;
+import br.ufba.poo.tot.camera.translaguage.CameraPreview;
 import br.ufba.poo.tot.ocr.OCRTreatment;
 
 import com.gtranslate.Language;
@@ -72,11 +70,15 @@ public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRL
 		viewPhoto.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				takePicture();
+//				takePicture();
+				takePictureCustom();
 			}
 		});
 	}
 	
+	/**
+	 * Método que chama a ação de tirar foto.
+	 */
 	private void takePicture() {
 		CameraCapturer cameraCapturer = new CameraCapturer();
 	    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -84,6 +86,17 @@ public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRL
 	    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 	    this.getActivity().startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
+	
+	/**
+	 * Método que chama a a ação de tirar foto
+	 * Customizada - from Translanguage
+	 */
+	private void takePictureCustom() {
+		Intent intent = new Intent(getActivity(),CameraPreview.class);
+		this.getActivity().startActivity(intent);
+		
+	}
+	
 
 	@Override
 	public void setPhotoCaptured(Bitmap photo) {
@@ -101,7 +114,6 @@ public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRL
 		    int height = photo.getHeight();
 		    int newWidth = 200;
 		    int newHeight = 200;
-		    // calculate the scale - in this case = 0.4f
 		    float scaleWidth = ((float) newWidth) / width;
 		    float scaleHeight = ((float) newHeight) / height;
 		    Matrix matrix = new Matrix();

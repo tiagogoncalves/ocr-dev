@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.android.translanguage.free.version.Preview
+        android:id="@+id/preview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" >
+    </com.android.translanguage.free.version.Preview>
+
+    <ImageView
+        android:id="@+id/flash"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/flash" />
+
+    <ImageView
+        android:id="@+id/to_language"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/to_language_chinese" />
+
+    <ImageView
+        android:id="@+id/from_language"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/from_language_english" />
+
+    <ImageView
+        android:id="@+id/startcamerapreview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/camera" />
+
+    <com.android.translanguage.free.version.TouchView
+        android:id="@+id/left_top_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+</RelativeLayout>
