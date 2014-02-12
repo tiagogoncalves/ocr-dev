@@ -41,6 +41,7 @@ public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRL
 	 */
 	private void updatePhoto() {
 		if(photo!=null){
+			cropImage();
 			viewPhoto.setImageBitmap(photo);
 			initial.setVisibility(ImageView.GONE);
 			viewPhoto.setVisibility(ImageView.VISIBLE);
@@ -88,46 +89,26 @@ public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRL
 	public void setPhotoCaptured(Bitmap photo) {
 		this.photo=photo;
 		updatePhoto();
-//		scaleImage(viewPhoto, dpToPx(300));
 		OCRTreatment ocrT = new OCRTreatment(getActivity(), photo);
 		ocrT.execute();
 	}
 	
-	private void scaleImage(ImageView view, int boundBoxInDp) {
-		Drawable drawing = view.getDrawable();
-		Bitmap bitmap = ((BitmapDrawable) drawing).getBitmap();
-
-		// Get current dimensions
-		int width = bitmap.getWidth();
-		int height = bitmap.getHeight();
-
-		float xScale = ((float) boundBoxInDp) / width;
-		float yScale = ((float) boundBoxInDp) / height;
-		float scale = (xScale <= yScale) ? xScale : yScale;
-
-		Matrix matrix = new Matrix();
-		matrix.postScale(scale, scale);
-
-		Bitmap scaledBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height,matrix, true);
-
-		BitmapDrawable result = new BitmapDrawable(scaledBitmap);
-		width = scaledBitmap.getWidth();
-		height = scaledBitmap.getHeight();
-
-		// Apply the scaled bitmap
-		view.setImageDrawable(result);
-
-		// Now change ImageView's dimensions to match the scaled image
-		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-		params.width = width;
-		params.height = height;
-		view.setLayoutParams(params);
+	/**
+	 * Recorta imagem.
+	 */
+	private void cropImage() {
+		    int width = photo.getWidth();
+		    int height = photo.getHeight();
+		    int newWidth = 200;
+		    int newHeight = 200;
+		    // calculate the scale - in this case = 0.4f
+		    float scaleWidth = ((float) newWidth) / width;
+		    float scaleHeight = ((float) newHeight) / height;
+		    Matrix matrix = new Matrix();
+		    matrix.postScale(scaleWidth, scaleHeight);
+		    photo = Bitmap.createBitmap(photo, 0, 0,width, height, matrix, true);
 	}
 
-	private int dpToPx(int dp) {
-		float density = getActivity().getResources().getDisplayMetrics().density;
-		return Math.round((float) dp * density);
-	}
 
 	@Override
 	public void setTextExtracted(String text) {
