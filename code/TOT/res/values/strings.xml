@@ -14,5 +14,8 @@
     <string name="cancel">Cancelar</string>
     <string name="ok">Escolher</string>
     <string name="choose_language">Escolha o idioma</string>
+    <string name="title_wait">Aguarde um momento!</string>
+    <string name="body_wait">Realizando a extração do texto da imagem.</string>
+    
 
 </resources>

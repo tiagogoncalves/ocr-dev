@@ -1,5 +1,6 @@
 package br.ufba.poo.tot.activities;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -29,7 +30,6 @@ public class TOTMainActivity extends FragmentActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tot_main_activity);
-//		((TOTApp)getApplication()).setOcrFile(new OCRFile(TOTMainActivity.this));
 		cameraFragment = (CameraFragment)getSupportFragmentManager().findFragmentById(R.id.camera_fragment);
 		cameraCapturer = new CameraCapturer();
 	}
@@ -42,6 +42,7 @@ public class TOTMainActivity extends FragmentActivity{
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CameraCapturer.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+//			cameraFragment.setPhotoCaptured(inflateBitmap("/home/flavio/workspace/ocr-dev/code/TOT/image_samples/1.jpg"));
 			cameraFragment.setPhotoCaptured(inflateBitmap());
 		}
 	}
@@ -54,6 +55,27 @@ public class TOTMainActivity extends FragmentActivity{
 		InputStream stream = null;
 		Bitmap photo = null;
 		Uri fileUri = cameraCapturer.getOutputMediaFileUri();
+		try {
+			stream = getContentResolver().openInputStream(fileUri);
+			BitmapFactory.Options opts = new BitmapFactory.Options();
+			opts.inPreferredConfig = Config.ARGB_8888;
+			photo = BitmapFactory.decodeStream(stream, null, opts);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return photo;
+	}
+	
+	
+	/**
+	 * Método que infla o bitmap vindo do arquivo teste
+	 * @return
+	 */
+	private Bitmap inflateBitmap(String path) {
+		InputStream stream = null;
+		Bitmap photo = null;
+		File f = new File(path);
+		Uri fileUri = Uri.fromFile(f);
 		try {
 			stream = getContentResolver().openInputStream(fileUri);
 			BitmapFactory.Options opts = new BitmapFactory.Options();

@@ -16,22 +16,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import br.ufba.poo.tot.R;
-import br.ufba.poo.tot.activities.OCRTreatment;
 import br.ufba.poo.tot.camera.CameraCapturer;
 import br.ufba.poo.tot.camera.events.OnCameraListener;
+import br.ufba.poo.tot.camera.events.OnOCRListener;
+import br.ufba.poo.tot.ocr.OCRTreatment;
+
+import com.gtranslate.Language;
+import com.gtranslate.Translator;
 
 /**
- * Esta Fragment é corresponde a Barra Superior Principal do Aplicativo.
+ * Este Fragment é corresponde a Barra Superior Principal do Aplicativo.
  * @author OCRDev
  *
  */
-public class CameraFragment extends Fragment  implements OnCameraListener{
+public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRListener{
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private Uri fileUri;
 	private Bitmap photo;
 	ImageView initial;
 	ImageView viewPhoto;
-	
 	
 	/**
 	 * Atualiza foto
@@ -85,12 +88,9 @@ public class CameraFragment extends Fragment  implements OnCameraListener{
 	public void setPhotoCaptured(Bitmap photo) {
 		this.photo=photo;
 		updatePhoto();
-		scaleImage(viewPhoto, dpToPx(300));
-//		OCRFile ocrFile = ((TOTApp)getActivity().getApplication()).getOcrFile();
-//		if(ocrFile!=null){
-//				ocrFile.setPhoto(photo);
-				OCRTreatment.runOCR(CameraFragment.this.getActivity(),photo);
-//		}
+//		scaleImage(viewPhoto, dpToPx(300));
+		OCRTreatment ocrT = new OCRTreatment(getActivity(), photo);
+		ocrT.execute();
 	}
 	
 	private void scaleImage(ImageView view, int boundBoxInDp) {
@@ -108,8 +108,7 @@ public class CameraFragment extends Fragment  implements OnCameraListener{
 		Matrix matrix = new Matrix();
 		matrix.postScale(scale, scale);
 
-		Bitmap scaledBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height,
-				matrix, true);
+		Bitmap scaledBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height,matrix, true);
 
 		BitmapDrawable result = new BitmapDrawable(scaledBitmap);
 		width = scaledBitmap.getWidth();
@@ -119,8 +118,7 @@ public class CameraFragment extends Fragment  implements OnCameraListener{
 		view.setImageDrawable(result);
 
 		// Now change ImageView's dimensions to match the scaled image
-		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view
-				.getLayoutParams();
+		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
 		params.width = width;
 		params.height = height;
 		view.setLayoutParams(params);
@@ -129,6 +127,12 @@ public class CameraFragment extends Fragment  implements OnCameraListener{
 	private int dpToPx(int dp) {
 		float density = getActivity().getResources().getDisplayMetrics().density;
 		return Math.round((float) dp * density);
+	}
+
+	@Override
+	public void setTextExtracted(String text) {
+		Translator t = Translator.getInstance();
+		String textTrans = t.translate(text, Language.ENGLISH, Language.PORTUGUESE);
 	}
 
 

@@ -65,6 +65,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f050000;
+        public static final int body_wait=0x7f05000e;
         public static final int cancel=0x7f05000a;
         public static final int choose_language=0x7f05000c;
         public static final int english=0x7f050005;
@@ -76,6 +77,7 @@ public final class R {
         public static final int spanish=0x7f050008;
         public static final int text_in_english=0x7f050002;
         public static final int text_in_portuguese=0x7f050003;
+        public static final int title_wait=0x7f05000d;
         public static final int unavailable_camera=0x7f050001;
     }
     public static final class style {
