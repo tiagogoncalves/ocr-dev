@@ -242,6 +242,7 @@ public class CameraPreview extends FragmentActivity implements SensorEventListen
 							int bottom = (int)(ratio[0]*(double)mView.getmRightBottomPosY());
 							savePhoto(mPreview.getPic(left,top,right,bottom));
 							mAutoFocus = true;
+							CameraPreview.this.closeCamera();
 						} 
 					});
 					tGetPic.start();
@@ -259,6 +260,10 @@ public class CameraPreview extends FragmentActivity implements SensorEventListen
 				finish();
 			}
 			return super.onKeyDown(keyCode, event);
+		}
+
+		protected void closeCamera() {
+			finish();
 		}
 
 		private boolean savePhoto(Bitmap bm) {
