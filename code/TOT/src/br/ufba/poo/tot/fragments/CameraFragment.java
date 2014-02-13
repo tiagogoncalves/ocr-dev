@@ -2,10 +2,8 @@ package br.ufba.poo.tot.fragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import br.ufba.poo.tot.R;
-import br.ufba.poo.tot.camera.CameraCapturer;
+import br.ufba.poo.tot.activities.TOTMainActivity;
 import br.ufba.poo.tot.camera.events.OnCameraListener;
 import br.ufba.poo.tot.camera.events.OnOCRListener;
 import br.ufba.poo.tot.camera.translaguage.CameraPreview;
@@ -28,18 +26,15 @@ import com.gtranslate.Translator;
  *
  */
 public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRListener{
-	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-	private Uri fileUri;
 	private Bitmap photo;
-	ImageView initial;
-	ImageView viewPhoto;
+	private ImageView initial;
+	private ImageView viewPhoto;
 	
 	/**
 	 * Atualiza foto
 	 */
 	private void updatePhoto() {
 		if(photo!=null){
-			cropImage();
 			viewPhoto.setImageBitmap(photo);
 			initial.setVisibility(ImageView.GONE);
 			viewPhoto.setVisibility(ImageView.VISIBLE);
@@ -70,31 +65,18 @@ public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRL
 		viewPhoto.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				takePicture();
-				takePictureCustom();
+				takePicture();
 			}
 		});
-	}
-	
-	/**
-	 * Método que chama a ação de tirar foto.
-	 */
-	private void takePicture() {
-		CameraCapturer cameraCapturer = new CameraCapturer();
-	    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-	    fileUri = cameraCapturer.getOutputMediaFileUri(); 
-	    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-	    this.getActivity().startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
 	
 	/**
 	 * Método que chama a a ação de tirar foto
 	 * Customizada - from Translanguage
 	 */
-	private void takePictureCustom() {
+	private void takePicture() {
 		Intent intent = new Intent(getActivity(),CameraPreview.class);
-		this.getActivity().startActivity(intent);
-		
+		this.getActivity().startActivityForResult(intent,TOTMainActivity.PHOTO_CAPTURED);
 	}
 	
 
@@ -104,21 +86,6 @@ public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRL
 		updatePhoto();
 		OCRTreatment ocrT = new OCRTreatment(getActivity(), photo);
 		ocrT.execute();
-	}
-	
-	/**
-	 * Recorta imagem.
-	 */
-	private void cropImage() {
-		    int width = photo.getWidth();
-		    int height = photo.getHeight();
-		    int newWidth = 200;
-		    int newHeight = 200;
-		    float scaleWidth = ((float) newWidth) / width;
-		    float scaleHeight = ((float) newHeight) / height;
-		    Matrix matrix = new Matrix();
-		    matrix.postScale(scaleWidth, scaleHeight);
-		    photo = Bitmap.createBitmap(photo, 0, 0,width, height, matrix, true);
 	}
 
 

@@ -57,20 +57,6 @@ public class TouchView extends View {
 	private ScaleGestureDetector mScaleDetector;
 	private float mScaleFactor = 1.f;
 	
-	private Paint ocrText;
-	private String ocrTextString = "";
-
-	public void setOcrTextString(String ocrTextString){
-		this.ocrTextString = ocrTextString;
-	}
-	
-	private Paint recognizedText;
-	private String recognizedTextString = "";
-
-	public void setRecognizedTextString(String recognizedTextString) {
-		this.recognizedTextString = recognizedTextString;
-	}
-
 	public TouchView(Context context){
 		super(context);
 		init(context);
@@ -94,8 +80,6 @@ public class TouchView extends View {
 		bottomLine = new Paint();
 		leftLine = new Paint();
 		rightLine = new Paint();
-		recognizedText = new Paint();
-		ocrText = new Paint();
 
 		setLineParameters(Color.WHITE,2);
 
@@ -139,21 +123,11 @@ public class TouchView extends View {
 		rightLine.setColor(color);
 		rightLine.setStrokeWidth(width);
 		
-		recognizedText.setColor(Color.CYAN);
-		recognizedText.setFakeBoldText(true);
-		recognizedText.setTextSize(24);
-		
-		ocrText.setColor(Color.MAGENTA);
-		ocrText.setFakeBoldText(true);
-		ocrText.setTextSize(16);
 	}
 
 	public void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		canvas.save();
-		
-		canvas.drawText("Translate: "+recognizedTextString, mLeftBottomPosX+10, mLeftBottomPosY+75, recognizedText);
-		canvas.drawText("Recognized: "+ocrTextString, mLeftBottomPosX+10, mLeftBottomPosY+50, ocrText);
 		
 		canvas.drawLine(mLeftTopPosX+mCenter, mLeftTopPosY+mCenter,
 				mRightTopPosX+mCenter, mRightTopPosY+mCenter, topLine);
@@ -163,8 +137,6 @@ public class TouchView extends View {
 				mLeftBottomPosX+mCenter,mLeftBottomPosY+mCenter,leftLine);
 		canvas.drawLine(mRightTopPosX+mCenter,mRightTopPosY+mCenter,
 				mRightBottomPosX+mCenter,mRightBottomPosY+mCenter,rightLine);
-		//canvas.translate(mPosX, mPosY);
-		//canvas.scale(mScaleFactor, mScaleFactor);
 
 
 		mLeftTopIcon.setBounds((int)mLeftTopPosX, (int)mLeftTopPosY,
@@ -208,13 +180,6 @@ public class TouchView extends View {
 				break;
 			}
 
-			//Log.i(TAG,"x: "+x);
-			//Log.i(TAG,"y: "+y);
-			//Log.i(TAG,"mLeftTopPosX: "+mLeftTopPosX);
-			//Log.i(TAG,"mLeftTopPosY: "+mLeftTopPosY);
-			//Log.i(TAG,"mLeftTopPosX: "+mRightTopPosX);
-			//Log.i(TAG,"mRightTopPosX: "+mRightTopPosY);
-
 
 			manhattanDistance(x,y);
 
@@ -230,8 +195,6 @@ public class TouchView extends View {
 			final int pointerIndex = ev.findPointerIndex(mActivePointerId);
 			final float x = ev.getX();
 			final float y = ev.getY();
-			//Log.i(TAG,"x: "+x);
-			//Log.i(TAG,"y: "+y);
 
 			// Only move if the ScaleGestureDetector isn't processing a gesture.
 			if (!mScaleDetector.isInProgress()) {
@@ -358,8 +321,6 @@ public class TouchView extends View {
 		double rightBottomMan = Math.sqrt(Math.pow((Math.abs((double)x-(double)mRightBottomPosX)),2)
 				+ Math.pow((Math.abs((double)y-(double)mRightBottomPosY)),2));
 
-		//Log.i(TAG,"leftTopMan: "+leftTopMan);
-		//Log.i(TAG,"RightTopMan: "+rightTopMan);
 
 		if (leftTopMan < 50){
 			mLeftTopBool = true;

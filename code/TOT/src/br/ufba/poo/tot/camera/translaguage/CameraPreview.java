@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,8 +21,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -34,14 +36,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout.LayoutParams;
 import br.ufba.poo.tot.R;
+import br.ufba.poo.tot.activities.TOTMainActivity;
+import br.ufba.poo.tot.camera.BitmapManager;
 
 
-public class CameraPreview extends Activity implements SensorEventListener {
+public class CameraPreview extends FragmentActivity implements SensorEventListener {
 	private Preview mPreview; 
 	private ImageView mTakePicture;
 	private TouchView mView;
-	private ImageView mFlash;
 	private PopupWindow mFromPopUpWindow;
 	private PopupWindow mToPopUpWindow;
 
@@ -57,14 +61,22 @@ public class CameraPreview extends Activity implements SensorEventListener {
 	private float mLastZ = 0;
 	private Rect rec = new Rect();
 
+
 	private int mScreenHeight;
 	private int mScreenWidth;
 
 	private boolean mInvalidate = false;
 
+	private AlertDialog alert;
+
 	private Intent intent;
 
-	private File mLocation = new File(Environment.getExternalStorageDirectory(),"translanguage/test.jpg");
+	private ProgressDialog dialog;
+	private boolean mNewDownload = false;
+	private int mLanguageToDownload = 6;
+	private int progress = 0;
+	
+	private LayoutParams lp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,27 +84,31 @@ public class CameraPreview extends Activity implements SensorEventListener {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		setContentView(R.layout.main); // display our (only) XML layout - Views already ordered
+		setContentView(R.layout.main); 
 
 		//TODO Acelerômetro
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mAccel = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-		// get the window width and height
+
 		DisplayMetrics displaymetrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
 		mScreenHeight = displaymetrics.heightPixels;
 		mScreenWidth = displaymetrics.widthPixels;
 		Drawable mButtonDrawable = this.getResources().getDrawable(R.drawable.camera);
 
-
-		mFlash = (ImageView) findViewById(R.id.flash);
-
-		mFlash.setOnClickListener(flashListener);
+		//to hold my DownloadService intent - TODO Aqui é onde ele faz o download da base de comparação
+		intent = new Intent(this,DownloadService.class);
 
 
 		mTakePicture = (ImageView) findViewById(R.id.startcamerapreview);
 
+		lp = new LayoutParams(mTakePicture.getLayoutParams());
+		lp.setMargins((int)((double)mScreenWidth*.85),
+				(int)((double)mScreenHeight*.70) ,
+				(int)((double)mScreenWidth*.85)+mButtonDrawable.getMinimumWidth(), 
+				(int)((double)mScreenHeight*.70)+mButtonDrawable.getMinimumHeight());
+		mTakePicture.setLayoutParams(lp);
 		rec.set((int)((double)mScreenWidth*.85),
 				(int)((double)mScreenHeight*.10) ,
 				(int)((double)mScreenWidth*.85)+mButtonDrawable.getMinimumWidth(), 
@@ -103,14 +119,14 @@ public class CameraPreview extends Activity implements SensorEventListener {
 		mView = (TouchView) findViewById(R.id.left_top_view);
 		mView.setRec(rec);
 		
-
-		LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflater = (LayoutInflater)this.getSystemService
+		(LAYOUT_INFLATER_SERVICE);
 		GridView fromGridView = (GridView) inflater.inflate(R.layout.gridview, null,false);
+		fromGridView.setAdapter(new FromImageAdapter(this));
 		mFromPopUpWindow = new PopupWindow(fromGridView,mScreenWidth,mScreenHeight);
 		fromGridView.setOnItemClickListener(new OnItemClickListener(){
 
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 				Bundle b = new Bundle();
 				b.putInt("lang", arg2);
 				intent.putExtras(b);
@@ -118,11 +134,59 @@ public class CameraPreview extends Activity implements SensorEventListener {
 				mFromPopUpWindow.dismiss();
 				mTakePicture.setVisibility(View.VISIBLE);
 				mView.setVisibility(View.VISIBLE);
-				mFlash.setVisibility(View.VISIBLE);
+				dialog = new ProgressDialog(CameraPreview.this);
+				dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+				dialog.setMessage("Loading language. The first time " +
+						"this might take a few minutes while the language pack is" +
+						" being downloaded. Chinese, Japanese and Korean take much longer and it is recommended" +
+						" that for these languages Wifi is used. Please wait...");
+				dialog.show();
+				dialog.setCancelable(false);
+				mNewDownload = true;
+				mLanguageToDownload = arg2;
+				Thread updateProgressDialog = new Thread(new Runnable(){
+					public void run(){
+						while (mNewDownload){
+							try {
+								Thread.sleep(500);
+								dialog.setProgress(progress);
+								File zipFile = new File(Environment.getExternalStorageDirectory(),"translanguage/tessdata/"+Languages.mLanguages[mLanguageToDownload]);
+								progress = (int) ((zipFile.length()*100)/(Languages.mLanguageSizes[mLanguageToDownload]));
+								File file = new File(Environment.getExternalStorageDirectory(),"translanguage/tessdata/"+Languages.mLanguages2[mLanguageToDownload]);
+								if (file.exists()){
+									long length = file.length();
+									progress = (int) ((length*100)/Languages.mLanguageSizes[mLanguageToDownload])  + progress;
+									if (length >= Languages.mLanguageSizes[mLanguageToDownload]){
+										dialog.setProgress(100);
+										dialog.dismiss();
+										mNewDownload = false;
+										progress = 0;
+									}
+								}
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+
+					}
+				});
+				updateProgressDialog.start();
 			}
 
 		});
 
+		GridView toGridView =  (GridView) inflater.inflate(R.layout.gridview, null, false);
+		toGridView.setAdapter(new ToImageAdapter(this));
+		mToPopUpWindow = new PopupWindow(toGridView,mScreenWidth,mScreenHeight);
+		toGridView.setOnItemClickListener(new OnItemClickListener(){
+
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+				mToPopUpWindow.dismiss();
+				mTakePicture.setVisibility(View.VISIBLE);
+				mView.setVisibility(View.VISIBLE);
+			}
+
+		});
 		Bundle b = new Bundle();
 		b.putInt("lang", 6);
 		intent.putExtras(b);
@@ -158,33 +222,7 @@ public class CameraPreview extends Activity implements SensorEventListener {
 
 		};
 
-		private OnClickListener toLanguageListener = new OnClickListener(){
 
-			@Override
-			public void onClick(View v) {
-				mToPopUpWindow.showAtLocation(findViewById(R.id.relative_layout), Gravity.CENTER, 0, 0);
-				mToPopUpWindow.setFocusable(true);
-				mToPopUpWindow.update();
-				mTakePicture.setVisibility(View.GONE);
-				mView.setVisibility(View.GONE);
-				mFlash.setVisibility(View.GONE);
-			}
-
-		};
-
-		private OnClickListener fromLanguageListener = new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				mFromPopUpWindow.showAtLocation(findViewById(R.id.relative_layout), Gravity.CENTER, 0, 0);
-				mFromPopUpWindow.setFocusable(true);
-				mFromPopUpWindow.update();
-				mTakePicture.setVisibility(View.GONE);
-				mView.setVisibility(View.GONE);
-				mFlash.setVisibility(View.GONE);
-			}
-
-		};
 		private OnClickListener previewListener = new OnClickListener() {
 
 			@Override
@@ -192,6 +230,7 @@ public class CameraPreview extends Activity implements SensorEventListener {
 				if (mAutoFocus){
 					mAutoFocus = false;
 					mPreview.setCameraFocus(myAutoFocusCallback);
+					Wait.oneSec();
 					Thread tGetPic = new Thread( new Runnable() {
 						public void run() {
 							Double[] ratio = getRatio();
@@ -219,24 +258,23 @@ public class CameraPreview extends Activity implements SensorEventListener {
 			if (keyCode == KeyEvent.KEYCODE_BACK){
 				finish();
 			}
-			return super.onKeyDown(keyCode, event); 
+			return super.onKeyDown(keyCode, event);
 		}
 
-		private boolean savePhoto(Bitmap bm) {//TODO ver
+		private boolean savePhoto(Bitmap bm) {
 			System.gc();
 			FileOutputStream image = null;
 			try {
-				image = new FileOutputStream(mLocation);
+				BitmapManager bma = new BitmapManager();
+				image = new FileOutputStream(bma.getMediaFile());
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			bm.compress(CompressFormat.JPEG, 100, image);
-			if (bm != null) {
-				int h = bm.getHeight();
-				int w = bm.getWidth();
-			} else {
+				Log.e(CameraPreview.class.getName(),e.getMessage());
 				return false;
 			}
+			bm.compress(CompressFormat.JPEG, 100, image);
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra(TOTMainActivity.PHOTO,bm);
+			setResult(RESULT_OK,returnIntent);     
 			return true;
 		}
 
@@ -281,7 +319,7 @@ public class CameraPreview extends Activity implements SensorEventListener {
 				mAutoFocus = false;
 				mPreview.setCameraFocus(myAutoFocusCallback);
 			}
-			if (deltaY > .5 && mAutoFocus){ 
+			if (deltaY > .5 && mAutoFocus){
 				mAutoFocus = false;
 				mPreview.setCameraFocus(myAutoFocusCallback);
 			}
@@ -329,6 +367,6 @@ public class CameraPreview extends Activity implements SensorEventListener {
 		}
 
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
-		}
 
+		}
 }
