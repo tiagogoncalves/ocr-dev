@@ -159,14 +159,14 @@ public final class R {
         public static final int left_top_view=0x7f08000d;
         public static final int logo_tot_bar=0x7f08000f;
         public static final int ok=0x7f080009;
+        public static final int original_text=0x7f080015;
         public static final int photo=0x7f080002;
         public static final int preview=0x7f08000b;
         public static final int relative_layout=0x7f08000a;
         public static final int search_fragment=0x7f080011;
         public static final int startcamerapreview=0x7f08000c;
-        public static final int textView1=0x7f080015;
-        public static final int textView2=0x7f080016;
         public static final int translate_fragment=0x7f080010;
+        public static final int translated_text=0x7f080016;
     }
     public static final class layout {
         public static final int camera=0x7f030000;
@@ -185,6 +185,7 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f050000;
         public static final int body_wait=0x7f05000e;
+        public static final int body_wait_trans=0x7f05000f;
         public static final int cancel=0x7f05000a;
         public static final int choose_language=0x7f05000c;
         public static final int english=0x7f050005;
@@ -198,6 +199,7 @@ public final class R {
         public static final int text_in_portuguese=0x7f050003;
         public static final int title_wait=0x7f05000d;
         public static final int unavailable_camera=0x7f050001;
+        public static final int verify_connection=0x7f050010;
     }
     public static final class style {
         /** 

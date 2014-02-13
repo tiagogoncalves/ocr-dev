@@ -2,7 +2,6 @@ package br.ufba.poo.tot.fragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,10 +14,9 @@ import br.ufba.poo.tot.activities.TOTMainActivity;
 import br.ufba.poo.tot.camera.events.OnCameraListener;
 import br.ufba.poo.tot.camera.events.OnOCRListener;
 import br.ufba.poo.tot.camera.translaguage.CameraPreview;
+import br.ufba.poo.tot.dialogs.LanguageListDialog;
 import br.ufba.poo.tot.ocr.OCRTreatment;
-
-import com.gtranslate.Language;
-import com.gtranslate.Translator;
+import br.ufba.poo.tot.translator.TTranslator;
 
 /**
  * Este Fragment é corresponde a Barra Superior Principal do Aplicativo.
@@ -58,7 +56,8 @@ public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRL
 		initial.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				takePicture();
+//				takePicture();
+				setTextExtracted("I have one dog and two cats");
 			}
 		});
 		
@@ -91,8 +90,8 @@ public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRL
 
 	@Override
 	public void setTextExtracted(String text) {
-		Translator t = Translator.getInstance();
-		String textTrans = t.translate(text, Language.ENGLISH, Language.PORTUGUESE);
+		TranslateFragment tf = (TranslateFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.translate_fragment);
+		tf.setTextExtracted(text);
 	}
 
 

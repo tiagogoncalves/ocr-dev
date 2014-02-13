@@ -97,7 +97,7 @@ public class CameraPreview extends FragmentActivity implements SensorEventListen
 		mScreenWidth = displaymetrics.widthPixels;
 		Drawable mButtonDrawable = this.getResources().getDrawable(R.drawable.camera);
 
-		//to hold my DownloadService intent - TODO Aqui é onde ele faz o download da base de comparação
+		//to hold my DownloadService intent 
 		intent = new Intent(this,DownloadService.class);
 
 

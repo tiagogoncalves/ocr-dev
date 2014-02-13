@@ -16,6 +16,9 @@
     <string name="choose_language">Escolha o idioma</string>
     <string name="title_wait">Aguarde um momento!</string>
     <string name="body_wait">Realizando a extração do texto da imagem.</string>
+    <string name="body_wait_trans">Realizando a tradução do texto.</string>
+    <string name="verify_connection">Por favor verificar a conexão com a internet.</string>
+    
     
 
 </resources>
