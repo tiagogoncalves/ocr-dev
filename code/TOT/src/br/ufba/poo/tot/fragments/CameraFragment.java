@@ -3,10 +3,12 @@ package br.ufba.poo.tot.fragments;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import br.ufba.poo.tot.R;
@@ -14,9 +16,8 @@ import br.ufba.poo.tot.activities.TOTMainActivity;
 import br.ufba.poo.tot.camera.events.OnCameraListener;
 import br.ufba.poo.tot.camera.events.OnOCRListener;
 import br.ufba.poo.tot.camera.translaguage.CameraPreview;
-import br.ufba.poo.tot.dialogs.LanguageListDialog;
+import br.ufba.poo.tot.dialogs.SamplesImagesDialog;
 import br.ufba.poo.tot.ocr.OCRTreatment;
-import br.ufba.poo.tot.translator.TTranslator;
 
 /**
  * Este Fragment é corresponde a Barra Superior Principal do Aplicativo.
@@ -56,10 +57,20 @@ public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRL
 		initial.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				takePicture();
-				setTextExtracted("I have one dog and two cats");
+				takePicture();
 			}
 		});
+		
+		//Easter egg;
+		initial.setOnLongClickListener(new OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View arg0) {
+				DialogFragment sid = new SamplesImagesDialog();
+			    sid.show(getFragmentManager(), "sid");				
+				return false;
+			}
+		});
+		
 		
 		viewPhoto.setOnClickListener(new OnClickListener() {
 			@Override
@@ -67,6 +78,16 @@ public class CameraFragment extends Fragment  implements OnCameraListener,OnOCRL
 				takePicture();
 			}
 		});
+		// Easter egg;
+		viewPhoto.setOnLongClickListener(new OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View arg0) {
+				DialogFragment sid = new SamplesImagesDialog();
+			    sid.show(getFragmentManager(), "sid");
+				return false;
+			}
+		});
+		
 	}
 	
 	/**

@@ -62,6 +62,7 @@ public class OCRTreatment extends AsyncTask{
 	@Override
 	protected void onPostExecute(Object result) {
 		super.onPostExecute(result);
+		cameraFragment.setTextExtracted(textResult);
 		progress.dismiss();
 	}
 	
@@ -77,7 +78,8 @@ public class OCRTreatment extends AsyncTask{
 		baseApi.setImage(photo);
 		String recognizedText = baseApi.getUTF8Text();
 		baseApi.end();
-		cameraFragment.setTextExtracted(recognizedText);
+		textResult = recognizedText;
+		
 		return recognizedText;
 	}
 

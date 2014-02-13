@@ -13,8 +13,8 @@ public class BitmapManager{
 	private File mediaFile;
 
 	public BitmapManager(){
-		mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), dir);
-		mediaFile = new File(mediaStorageDir.getPath() + File.separator +"img_temp" + ".jpg");
+		setMediaStorageDir(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), dir));
+		mediaFile = new File(getMediaStorageDir().getPath() + File.separator +"img_temp" + ".jpg");
 	}
 
 	/** Create a file Uri for saving an image 
@@ -28,8 +28,8 @@ public class BitmapManager{
 	 *  From http://developer.android.com/guide/topics/media/camera.html#saving-media
 	 * */
 	private File getOutputMediaFile(){
-	    if (! mediaStorageDir.exists()){
-	        if (! mediaStorageDir.mkdirs()){
+	    if (! getMediaStorageDir().exists()){
+	        if (! getMediaStorageDir().mkdirs()){
 	            Log.d("OCRDev", "failed to create directory");
 	            return null;
 	        }
@@ -38,13 +38,13 @@ public class BitmapManager{
 	}
 
 	public boolean clear(){
-	    if (! mediaStorageDir.exists()){
-	        if (! mediaStorageDir.mkdirs()){
+	    if (! getMediaStorageDir().exists()){
+	        if (! getMediaStorageDir().mkdirs()){
 	            Log.d("OCRDev", "failed to create directory");
 	            return false;
 	        }
 	    }
-	    mediaStorageDir.delete();
+	    getMediaStorageDir().delete();
 	    return true;
 	}
 
@@ -54,6 +54,14 @@ public class BitmapManager{
 
 	public void setMediaFile(File mediaFile) {
 		this.mediaFile = mediaFile;
+	}
+
+	public File getMediaStorageDir() {
+		return mediaStorageDir;
+	}
+
+	public void setMediaStorageDir(File mediaStorageDir) {
+		this.mediaStorageDir = mediaStorageDir;
 	}
 
 }

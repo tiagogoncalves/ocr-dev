@@ -8,15 +8,15 @@
     <TextView
         android:id="@+id/choose_language"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:background="#FF6600"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        android:textColor="#FFFFFF"
-            android:textStyle="bold" 
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
         android:text="@string/choose_language"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/language_list"
@@ -26,35 +26,16 @@
         android:orientation="vertical" >
     </ListView>
 
-    <LinearLayout
-        android:id="@+id/buttons"
+    <Button
+        android:id="@+id/cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FF6600"
-            android:padding="10dp"
-            android:text="@string/cancel"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/ok"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FF6600"
-            android:padding="10dp"
-            android:text="@string/ok"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
-    </LinearLayout>
+        android:layout_weight="1"
+        android:background="#FF6600"
+        android:padding="10dp"
+        android:text="@string/cancel"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
 
 </LinearLayout>

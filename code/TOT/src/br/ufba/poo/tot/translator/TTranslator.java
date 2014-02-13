@@ -101,7 +101,7 @@ public class TTranslator extends AsyncTask{
 	 */
 	private void translate(String text,String from,String to){
 		Translator t = Translator.getInstance();
-		this.text= t.translate(text, from, to);
+		this.text= t.translate(text+" ", from, to);
 	}
 	
 	/**
